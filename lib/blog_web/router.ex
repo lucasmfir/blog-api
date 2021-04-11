@@ -1,6 +1,8 @@
 defmodule BlogWeb.Router do
   use BlogWeb, :router
 
+  # alias BlogWeb.UsersController
+
   pipeline :api do
     plug :accepts, ["json"]
   end

@@ -21,6 +21,7 @@ defmodule Blog.User do
     |> cast(params, @required_params ++ @optional_params)
     |> validate_required(@required_params)
     |> validate_required(:display_name, min: 8)
+    |> validate_required(:password, min: 6)
     |> validate_format(:email, @email_format)
     |> unique_constraint([:email])
 
