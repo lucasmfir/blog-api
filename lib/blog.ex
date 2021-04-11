@@ -8,6 +8,8 @@ defmodule Blog do
   """
   alias Blog.Users
 
+  defdelegate list_users(), to: Users, as: :list
+
   defdelegate show_user(params), to: Users, as: :show
 
   defdelegate create_user(params), to: Users, as: :create

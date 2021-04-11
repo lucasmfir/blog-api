@@ -3,6 +3,14 @@ defmodule Blog.Users do
 
   import Ecto.Query
 
+  def list() do
+    users =
+      User
+      |> Repo.all()
+
+    {:ok, users}
+  end
+
   def show(id) do
     case Repo.get(User, id) do
       %User{} = user ->

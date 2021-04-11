@@ -1,4 +1,8 @@
 defmodule BlogWeb.UsersView do
+  def render("index.json", %{users: users}) do
+    users_view(users)
+  end
+
   def render("show.json", %{user: user}) do
     user_view(user)
   end
@@ -18,4 +22,6 @@ defmodule BlogWeb.UsersView do
       image: user.image
     }
   end
+
+  defp users_view(users), do: Enum.map(users, &user_view(&1))
 end
