@@ -1,7 +1,7 @@
 defmodule BlogWeb.UsersController do
   use BlogWeb, :controller
 
-  # action_fallback BlogWeb.FallbackController
+  action_fallback BlogWeb.FallbackController
 
   def create(conn, params) do
     with {:ok, user} <- Blog.create_user(params) do
