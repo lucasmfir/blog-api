@@ -3,6 +3,14 @@ defmodule BlogWeb.UsersController do
 
   action_fallback BlogWeb.FallbackController
 
+  def show(conn, %{"id" => id}) do
+    with {:ok, user} <- Blog.show_user(id) do
+      conn
+      |> put_status(:ok)
+      |> render("show.json", user: user)
+    end
+  end
+
   def create(conn, params) do
     with {:ok, user} <- Blog.create_user(params) do
       conn

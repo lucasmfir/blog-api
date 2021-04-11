@@ -9,4 +9,6 @@ defmodule Blog do
   alias Blog.Users
 
   defdelegate create_user(params), to: Users, as: :create
+
+  defdelegate show_user(params), to: Users, as: :show
 end
