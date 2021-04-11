@@ -14,6 +14,7 @@ defmodule Blog.User do
     field :email, :string
     field :password, :string
     field :image, :string
+    has_many :posts, Post
 
     timestamps()
   end
