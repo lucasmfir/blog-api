@@ -18,4 +18,10 @@ defmodule Blog.Users do
     |> User.changeset()
     |> Repo.insert()
   end
+
+  def delete(id) do
+    User
+    |> Repo.get(id)
+    |> Repo.delete()
+  end
 end

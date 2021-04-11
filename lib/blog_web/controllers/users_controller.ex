@@ -18,4 +18,10 @@ defmodule BlogWeb.UsersController do
       |> render("create.json", user: user)
     end
   end
+
+  def delete(conn, %{"id" => id}) do
+    with {:ok, _user} <- Blog.delete_user(id) do
+      send_resp(conn, :no_content, "")
+    end
+  end
 end
