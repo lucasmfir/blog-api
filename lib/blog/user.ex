@@ -5,7 +5,7 @@ defmodule Blog.User do
 
   alias Blog.Post
 
-  @email_format ~r/[a-z0-9.]+@[a-z0-9.]+.[a-z0-9.]+/
+  @email_format ~r/[a-z0-9_.-]+@[a-z0-9-]+.[a-z0-9-.]+/
 
   @required_params [:display_name, :email, :password]
   @optional_params [:image]
