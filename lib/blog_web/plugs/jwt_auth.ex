@@ -1,11 +1,13 @@
 defmodule BlogWeb.Plugs.JwtAuth do
   import Plug.Conn
 
+  alias Blog.Token
+
   def init(opts), do: opts
 
   def call(conn, _opts) do
     with {:ok, token} <- get_token(conn),
-         {:ok, %{"user_id" => user_id}} <- Blog.Token.verify_and_validate(token) do
+         {:ok, %{"user_id" => user_id}} <- Token.verify_and_validate(token) do
       conn
       |> assign(:user_id, user_id)
       |> put_status(200)
