@@ -4,7 +4,7 @@ defmodule BlogWeb.PostsController do
   action_fallback BlogWeb.FallbackController
 
   def create(conn, params) do
-    user_id = 1
+    user_id = conn.assigns.user_id
 
     with {:ok, post} <- Blog.create_post(params, user_id) do
       conn

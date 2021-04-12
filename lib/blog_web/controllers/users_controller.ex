@@ -27,7 +27,9 @@ defmodule BlogWeb.UsersController do
     end
   end
 
-  def delete(conn, %{"id" => id}) do
+  def delete(conn, _params) do
+    id = conn.assigns.user_id
+
     with {:ok, _user} <- Blog.delete_user(id) do
       send_resp(conn, :no_content, "")
     end

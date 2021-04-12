@@ -4,8 +4,8 @@ defmodule Blog.Sessions do
   import Ecto.Query
 
   @signer Application.get_env(:joken, :default_signer)
-  # @time_to_expirate 60 * 2
-  @time_to_expirate 15
+  @time_to_expirate 60 * 2
+  # @time_to_expirate 15
 
   def login(params) do
     {email, password} = extract_login_params(params)
@@ -41,8 +41,6 @@ defmodule Blog.Sessions do
   defp valid_password?(param_password, user_password), do: param_password == user_password
 
   defp create_token(user_id) do
-    # signer = Joken.Signer.create("HS256", @signer)
-
     token_data = %{"user_id" => user_id, "exp" => expiration_time()}
     Token.generate_and_sign(token_data)
   end
