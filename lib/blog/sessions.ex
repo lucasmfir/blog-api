@@ -5,7 +5,6 @@ defmodule Blog.Sessions do
 
   @signer Application.get_env(:joken, :default_signer)
   @time_to_expirate 60 * 2
-  # @time_to_expirate 15
 
   def login(params) do
     {email, password} = extract_login_params(params)
@@ -22,8 +21,8 @@ defmodule Blog.Sessions do
   defp do_login(nil, _password), do: {:error, "\"email\" is required"}
 
   defp do_login(email, password) do
-    with {:ok, %User{id: user_id, password: user_password}} <- Users.get_by_email(email),
-         true <- valid_password?(password, user_password) do
+    with {:ok, %User{id: user_id, password_hash: password_hash}} <- Users.get_by_email(email),
+         true <- valid_password?(password, password_hash) do
       create_token(user_id)
     else
       _ ->
@@ -38,7 +37,7 @@ defmodule Blog.Sessions do
     {email, password}
   end
 
-  defp valid_password?(param_password, user_password), do: param_password == user_password
+  defp valid_password?(password, password_hash), do: Bcrypt.verify_pass(password, password_hash)
 
   defp create_token(user_id) do
     token_data = %{"user_id" => user_id, "exp" => expiration_time()}

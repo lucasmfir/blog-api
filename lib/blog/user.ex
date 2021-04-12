@@ -1,6 +1,7 @@
 defmodule Blog.User do
   use Ecto.Schema
   import Ecto.Changeset
+  alias Ecto.Changeset
 
   alias Blog.Post
 
@@ -12,7 +13,8 @@ defmodule Blog.User do
   schema "users" do
     field :display_name, :string
     field :email, :string
-    field :password, :string
+    field :password, :string, virtual: true
+    field :password_hash, :string
     field :image, :string
     has_many :posts, Post
 
@@ -27,6 +29,12 @@ defmodule Blog.User do
     |> validate_length(:password, min: 6)
     |> validate_format(:email, @email_format)
     |> unique_constraint([:email], message: "Usuário já existe")
-
+    |> put_password_hash()
   end
+
+  defp put_password_hash(%Changeset{valid?: true, changes: %{password: password}} = changeset) do
+    change(changeset, Bcrypt.add_hash(password))
+  end
+
+  defp put_password_hash(changeset), do: changeset
 end
