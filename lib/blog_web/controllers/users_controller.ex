@@ -12,7 +12,7 @@ defmodule BlogWeb.UsersController do
   end
 
   def show(conn, %{"id" => id}) do
-    with {:ok, user} <- Blog.show_user(id) do
+    with {:ok, user} <- Blog.get_user(id) do
       conn
       |> put_status(:ok)
       |> render("show.json", user: user)

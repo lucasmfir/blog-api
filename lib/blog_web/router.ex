@@ -7,12 +7,21 @@ defmodule BlogWeb.Router do
     plug :accepts, ["json"]
   end
 
+  pipeline :jwt_auth do
+    plug BlogWeb.Plugs.JwtAuth
+  end
+
   scope "/", BlogWeb do
     pipe_through :api
 
     post "/login", SessionsController, :login
 
-    resources "/users", UsersController, only: [:index, :show, :create, :delete]
+    resources "/users", UsersController, only: [:create]
+
+    pipe_through :jwt_auth
+
+    resources "/users", UsersController, only: [:index, :show, :delete]
+
     resources "/posts", PostsController, only: [:create]
   end
 

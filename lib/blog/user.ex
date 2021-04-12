@@ -2,7 +2,7 @@ defmodule Blog.User do
   use Ecto.Schema
   import Ecto.Changeset
 
-  # alias Ecto.Changeset
+  alias Blog.Post
 
   @email_format ~r/@/
 

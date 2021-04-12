@@ -2,6 +2,8 @@ defmodule Blog.Post do
   use Ecto.Schema
   import Ecto.Changeset
 
+  alias Blog.User
+
   @required_params [:title, :content, :user_id]
 
   schema "posts" do
