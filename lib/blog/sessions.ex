@@ -12,6 +12,11 @@ defmodule Blog.Sessions do
     do_login(email, password)
   end
 
+  def create_token(user_id) do
+    token_data = %{"user_id" => user_id, "exp" => expiration_time()}
+    Token.generate_and_sign(token_data)
+  end
+
   defp do_login(_email, ""), do: {:error, "\"password\" is not allowed to be empty"}
 
   defp do_login(_email, nil), do: {:error, "\"password\" is required"}
@@ -38,11 +43,6 @@ defmodule Blog.Sessions do
   end
 
   defp valid_password?(password, password_hash), do: Bcrypt.verify_pass(password, password_hash)
-
-  defp create_token(user_id) do
-    token_data = %{"user_id" => user_id, "exp" => expiration_time()}
-    Token.generate_and_sign(token_data)
-  end
 
   defp expiration_time(), do: Joken.current_time() + @time_to_expirate
 end

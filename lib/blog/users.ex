@@ -1,5 +1,5 @@
 defmodule Blog.Users do
-  alias Blog.{User, Repo}
+  alias Blog.{User, Repo, Sessions}
 
   import Ecto.Query
 
@@ -22,9 +22,12 @@ defmodule Blog.Users do
   end
 
   def create(params) do
-    params
-    |> User.changeset()
-    |> Repo.insert()
+    with {:ok, %User{id: user_id}} <-
+           params
+           |> User.changeset()
+           |> Repo.insert() do
+      Sessions.create_token(user_id)
+    end
   end
 
   def delete(id) do

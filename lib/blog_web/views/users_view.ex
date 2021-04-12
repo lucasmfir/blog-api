@@ -7,10 +7,9 @@ defmodule BlogWeb.UsersView do
     user_view(user)
   end
 
-  def render("create.json", %{user: user}) do
+  def render("create.json", %{token: token}) do
     %{
-      message: "user created",
-      user: user_view(user)
+      token: token
     }
   end
 
