@@ -5,6 +5,7 @@ defmodule BlogWeb.PostsController do
 
   def create(conn, params) do
     user_id = 1
+
     with {:ok, post} <- Blog.create_post(params, user_id) do
       conn
       |> put_status(:created)

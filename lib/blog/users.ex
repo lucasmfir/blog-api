@@ -11,7 +11,7 @@ defmodule Blog.Users do
     {:ok, users}
   end
 
-  def show(id) do
+  def get(id) do
     case Repo.get(User, id) do
       %User{} = user ->
         {:ok, user}
@@ -31,5 +31,15 @@ defmodule Blog.Users do
     User
     |> Repo.get(id)
     |> Repo.delete()
+  end
+
+  def get_by_email(email) do
+    case Repo.get_by(User, email: email) do
+      %User{} = user ->
+        {:ok, user}
+
+      _ ->
+        {:error, "Usuario não existe"}
+    end
   end
 end

@@ -10,6 +10,8 @@ defmodule BlogWeb.Router do
   scope "/", BlogWeb do
     pipe_through :api
 
+    post "/login", SessionsController, :login
+
     resources "/users", UsersController, only: [:index, :show, :create, :delete]
     resources "/posts", PostsController, only: [:create]
   end
