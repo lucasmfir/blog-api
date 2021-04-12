@@ -1,5 +1,5 @@
 defmodule Blog.Sessions do
-  alias Blog.{Token, User, Users, Post, Repo}
+  alias Blog.{Post, Repo, Token, User, Users}
 
   import Ecto.Query
 
@@ -26,7 +26,11 @@ defmodule Blog.Sessions do
   defp do_login(nil, _password), do: {:error, "\"email\" is required"}
 
   defp do_login(email, password) do
-    with {:ok, %User{id: user_id, password_hash: password_hash}} <- Users.get_by_email(email),
+    with {:ok,
+          %User{
+            id: user_id,
+            password_hash: password_hash
+          }} <- Users.get_by_email(email),
          true <- valid_password?(password, password_hash) do
       create_token(user_id)
     else
@@ -44,5 +48,5 @@ defmodule Blog.Sessions do
 
   defp valid_password?(password, password_hash), do: Bcrypt.verify_pass(password, password_hash)
 
-  defp expiration_time(), do: Joken.current_time() + @time_to_expirate
+  defp expiration_time, do: Joken.current_time() + @time_to_expirate
 end

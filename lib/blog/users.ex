@@ -1,9 +1,9 @@
 defmodule Blog.Users do
-  alias Blog.{User, Repo, Sessions}
+  alias Blog.{Repo, Sessions, User}
 
   import Ecto.Query
 
-  def list() do
+  def list do
     users =
       User
       |> Repo.all()

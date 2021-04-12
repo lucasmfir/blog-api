@@ -6,7 +6,7 @@ defmodule Blog do
   Contexts are also responsible for managing your data, regardless
   if it comes from the database, an external API or others.
   """
-  alias Blog.{Posts, Users, Sessions}
+  alias Blog.{Posts, Sessions, Users}
 
   defdelegate list_users(), to: Users, as: :list
 
