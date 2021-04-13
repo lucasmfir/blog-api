@@ -2,7 +2,7 @@ use Mix.Config
 
 # Configure your database
 config :blog, Blog.Repo,
-  username: "mse000000",
+  username: "postgres",
   password: "postgres",
   database: "blog_dev",
   hostname: "localhost",
