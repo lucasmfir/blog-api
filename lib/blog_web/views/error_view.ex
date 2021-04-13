@@ -18,6 +18,8 @@ defmodule BlogWeb.ErrorView do
     %{errors: %{detail: Phoenix.Controller.status_message_from_template(template)}}
   end
 
+  def render("401.json", %{result: message}), do: %{message: message}
+
   def render("400.json", %{result: %Changeset{} = changeset}),
     do: %{message: translate_errors(changeset)}
 

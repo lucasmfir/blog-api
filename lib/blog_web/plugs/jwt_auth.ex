@@ -1,5 +1,6 @@
 defmodule BlogWeb.Plugs.JwtAuth do
   import Plug.Conn
+  import Phoenix.Controller
 
   alias Blog.Token
 
@@ -29,7 +30,9 @@ defmodule BlogWeb.Plugs.JwtAuth do
 
   defp unauthorized(conn, msg) do
     conn
-    |> send_resp(:unauthorized, msg)
+    |> put_status(:unauthorized)
+    |> put_view(BlogWeb.ErrorView)
+    |> render("401.json", %{result: msg})
     |> halt()
   end
 end
