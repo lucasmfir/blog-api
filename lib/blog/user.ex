@@ -7,8 +7,8 @@ defmodule Blog.User do
 
   @email_format ~r/[a-z0-9_.-]+@[a-z0-9-]+.[a-z0-9-.]+/
 
-  @required_params [:display_name, :email, :password]
-  @optional_params [:image]
+  @required_params ~w(display_name email password)a
+  @optional_params ~w(image)a
 
   schema "users" do
     field :display_name, :string

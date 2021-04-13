@@ -1,7 +1,7 @@
 defmodule Blog.PostsTest do
   use Blog.DataCase, async: true
 
-  alias Blog.{Post, Posts, Token}
+  alias Blog.{Post, Posts}
 
   @default_user_params %{
     "display_name" => "user name",

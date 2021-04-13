@@ -4,7 +4,7 @@ defmodule Blog.Post do
 
   alias Blog.User
 
-  @required_params [:title, :content, :user_id]
+  @required_params ~w(title content user_id)a
 
   schema "posts" do
     field :title, :string
