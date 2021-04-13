@@ -26,7 +26,7 @@ defmodule Blog.UsersTest do
 
     test "when there is an user with same email, returns an error" do
       Blog.create_user(@default_user_params)
-      
+
       assert {:error, %Changeset{} = changeset} = Users.create(@default_user_params)
       assert "Usuário já existe" == changeset_error_msg(changeset, :email)
     end
@@ -42,14 +42,18 @@ defmodule Blog.UsersTest do
       invalid_name_params = %{@default_user_params | "display_name" => "name"}
 
       assert {:error, %Changeset{} = changeset} = Blog.create_user(invalid_name_params)
-      assert "should be at least %{count} character(s)" == changeset_error_msg(changeset, :display_name)
+
+      assert "should be at least %{count} character(s)" ==
+               changeset_error_msg(changeset, :display_name)
     end
 
     test "when password is shorter than 6, returns an error" do
       invalid_password_params = %{@default_user_params | "password" => "123"}
 
       assert {:error, %Changeset{} = changeset} = Blog.create_user(invalid_password_params)
-      assert "should be at least %{count} character(s)" == changeset_error_msg(changeset, :password)
+
+      assert "should be at least %{count} character(s)" ==
+               changeset_error_msg(changeset, :password)
     end
 
     test "when required field is not passed, returns an error" do
