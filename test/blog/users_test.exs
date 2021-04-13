@@ -50,7 +50,10 @@ defmodule Blog.UsersTest do
     test "when password is shorter than 6, returns an error" do
       invalid_password_params = %{@default_user_params | "password" => "123"}
 
-      assert {:error, %Changeset{} = changeset} = Blog.create_user(invalid_password_params)
+      assert {
+               :error,
+               %Changeset{} = changeset
+             } = Blog.create_user(invalid_password_params)
 
       assert "should be at least %{count} character(s)" ==
                changeset_error_msg(changeset, :password)

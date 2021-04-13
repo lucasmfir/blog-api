@@ -1,10 +1,7 @@
 defmodule Blog.SessionsTest do
   use Blog.DataCase, async: true
 
-  alias Blog.{Sessions, Token, User, Users}
-  alias Ecto.Changeset
-
-  # import Blog.TestHelpers
+  alias Blog.{Sessions, Token}
 
   @default_user_params %{
     "display_name" => "user name",

@@ -3,7 +3,6 @@ defmodule Blog.Sessions do
 
   import Ecto.Query
 
-  @signer Application.get_env(:joken, :default_signer)
   @time_to_expirate 60 * 2
 
   def login(params) do
